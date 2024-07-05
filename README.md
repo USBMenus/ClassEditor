@@ -3,7 +3,7 @@
 
 Edit Classes Without Restrictions
 
-Download the latest version from the [Releases](https://github.com/usbmenus/classeditor/releases) tab
+you can download the latest version from the [Releases](https://github.com/usbmenus/classeditor/releases) tab
 
 Note: items that need a wildcard to be used will not stick unless you have that wildcard
 
