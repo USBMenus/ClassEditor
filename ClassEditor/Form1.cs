@@ -483,33 +483,30 @@ namespace ClassEditor
 
         private void classNameButton_Click(object sender, EventArgs e)
         {
+            className = classNameTB.Text;
+            previous = setSelected;
             classNameTimer.Start();
             MessageBox.Show("You need to switch to a different class set for the name to apply.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        byte[] previousSet = new byte[] { 1, 1};
+        int previous = -1;
+        string className = "";
 
         private void classNameTimer_Tick(object sender, EventArgs e)
         {
             if (attached)
             {
-                byte[] bytes = m.ReadBytes("02F9AFF8", 2);
-                if (previousSet[0] == 1 && previousSet[1] == 1)
+                //string value = (0x02FB4DD4 + (setSelected * 701) + (classNamesCB.SelectedIndex * 16)).ToString("X8");
+                string value = (0x02FB4DD4 + (previous * 701) + (classNamesCB.SelectedIndex * 16)).ToString("X8");
+                if (previous != setSelected)
                 {
-                    previousSet[0] = bytes[0];
-                    previousSet[1] = bytes[1];
-                }
-                if (previousSet[0] != bytes[0] || previousSet[1] != bytes[1])
-                {
-                    string value = (0x02FB4DD4 + (setSelected * 701) + (classNamesCB.SelectedIndex * 16)).ToString("X8");
                     m.WriteMemory(value, "bytes", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0");
-                    m.WriteMemory(value, "string", classNameTB.Text);
+                    m.WriteMemory(value, "string", className);
                     classNameTimer.Stop();
-                    previousSet = new byte[] { 1, 1};
+                    previous = setSelected;
                     return;
                 }
-                previousSet[0] = bytes[0];
-                previousSet[1] = bytes[1];
+                previous = setSelected;
             }
         }
 
