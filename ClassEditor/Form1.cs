@@ -39,6 +39,7 @@ namespace ClassEditor
         string[] sniperRifleAttachments = { "Suppressor", "Ballsitic CPU", "Zoom", "Fast Mag", "FMJ", "ACOG", "Extended Clip", "Laser Sight", "Dual Band" };
         string[] LMGAttachments = { "EOTech", "Fore Grip", "FMJ", "Reflex", "Quickdraw", "Target Finder", "Stock", "ACOG", "Laser Sight", "Suppressor", "Zoom", "Extended Clip", "Hybrid Optic", "Rapid Fire", "Dual Band" };
         string[] pistolAttachments = { "Reflex", "Extended Clip", "Laser Sight", "Long Barrel", "FMJ", "Fast Mag", "Suppressor", "Knife", "Dual Wield"};
+        string[] executionerAttachments = { "Reflex", "Laser Sight", "Long Barrel", "FMJ", "Fast Mag", "Suppressor", "Knife", "Dual Wield" };
         string[] specialAttachments = { "Reflex", "ACOG", "Dual Band", "Zoom", "Tri-Bolt"};
         string[] launcherAttachments = { };
         byte[][] selectedSet = { new byte[] { 0, 0 }, new byte[] { 64, 0 }, new byte[] { 128, 0 }, new byte[] { 192, 0 }, new byte[] { 0, 1 }, new byte[] { 64, 1 }, new byte[] { 128, 1 }, new byte[] { 192, 1 }, new byte[] { 0, 2 }, new byte[] { 64, 2 } };
@@ -131,63 +132,59 @@ namespace ClassEditor
             string[] items = { };
             foreach (ComboBox cb in comboBoxes)
             {
+                cb.Items.Clear();
                 if (index >= 0 && index <= 3) //shotguns
                 {
-                    cb.Items.Clear();
                     items = shotgunAttachments;
                 }
 
                 if (index >= 4 && index <= 12) //ars
                 {
-                    cb.Items.Clear();
                     items = assaultRiflesAttachments;
                 }
 
                 if (index >= 13 && index <= 19) //smgs
                 {
-                    cb.Items.Clear();
                     items = submachineGunAttachments;
                 }
 
                 if (index == 20)
                 {
-                    cb.Items.Clear();
                     items = new string[] { };
                 }
 
                 if (index >= 21 && index <= 24) //snipers
                 {
-                    cb.Items.Clear();
                     items = sniperRifleAttachments;
                 }
 
                 if (index >= 25 && index <= 28) //lmgs
                 {
-                    cb.Items.Clear();
                     items = LMGAttachments;
                 }
 
                 if (index >= 29 && index <= 33) //pistols
                 {
-                    cb.Items.Clear();
                     items = pistolAttachments;
+                }
+
+                if (index == 32)//executioner
+                {
+                    items = executionerAttachments;
                 }
 
                 if (index == 34) //specials - crossbow
                 {
-                    cb.Items.Clear();
                     items = specialAttachments;
                 }
 
                 if (index == 35) //ballistic knife
                 {
-                    cb.Items.Clear();
                     items = launcherAttachments;
                 }
 
                 if (index >= 36 && index <= 38) //launchers
                 {
-                    cb.Items.Clear();
                     items = launcherAttachments;
                 }
 
@@ -508,6 +505,8 @@ namespace ClassEditor
                     m.WriteMemory(value, "bytes", "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0");
                     m.WriteMemory(value, "string", classNameTB.Text);
                     classNameTimer.Stop();
+                    previousSet = new byte[] { 1, 1};
+                    return;
                 }
                 previousSet[0] = bytes[0];
                 previousSet[1] = bytes[1];
