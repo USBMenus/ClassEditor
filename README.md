@@ -1,2 +1,4 @@
 # ClassEditor
- bo2 class editor for plutonium t6
+ Call of Duty: Black Ops II Class Editor for Plutonium T6
+
+Edit Classes Without Restrictions
