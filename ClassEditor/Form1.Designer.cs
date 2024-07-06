@@ -64,6 +64,7 @@
             this.classNameTimer = new System.Windows.Forms.Timer(this.components);
             this.statusTextLabel = new System.Windows.Forms.Label();
             this.statusLabel = new System.Windows.Forms.Label();
+            this.aotCB = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -556,16 +557,32 @@
             this.statusLabel.TabIndex = 2;
             this.statusLabel.Text = "Status:";
             // 
+            // aotCB
+            // 
+            this.aotCB.AutoSize = true;
+            this.aotCB.Checked = true;
+            this.aotCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.aotCB.Location = new System.Drawing.Point(591, 258);
+            this.aotCB.Name = "aotCB";
+            this.aotCB.Size = new System.Drawing.Size(98, 17);
+            this.aotCB.TabIndex = 5;
+            this.aotCB.Text = "Always On Top";
+            this.aotCB.UseVisualStyleBackColor = true;
+            this.aotCB.CheckedChanged += new System.EventHandler(this.aotCB_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(701, 276);
+            this.Controls.Add(this.aotCB);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.statusTextLabel);
             this.Controls.Add(this.statusLabel);
             this.Name = "Form1";
+            this.ShowIcon = false;
             this.Text = "Plutonium T6 Class Editor";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -615,6 +632,7 @@
         private System.Windows.Forms.Button exportClassButton;
         private System.Windows.Forms.Label statusTextLabel;
         private System.Windows.Forms.Label statusLabel;
+        private System.Windows.Forms.CheckBox aotCB;
     }
 }
 

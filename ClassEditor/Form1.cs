@@ -217,7 +217,7 @@ namespace ClassEditor
 
             attachmentComboBox(index, new ComboBox[] { sAttachment1CB, sAttachment2CB });
 
-            if (index >= 28)
+            if (index > 28)
                 value = weaponValues[index];
             else
                 value = (weaponValues[index]) / 2;
@@ -538,6 +538,11 @@ namespace ClassEditor
                 byte[] bytes = Convert.FromBase64String(code);
                 m.WriteBytes("02F9AFFA", bytes);
             }
+        }
+
+        private void aotCB_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = aotCB.Checked;
         }
     }
 }
