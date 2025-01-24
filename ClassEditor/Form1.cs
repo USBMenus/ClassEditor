@@ -263,6 +263,7 @@ namespace ClassEditor
         private void gameCheckTimer_Tick(object sender, EventArgs e)
         {
             Process[] proc = Process.GetProcessesByName("plutonium-bootstrapper-win32");
+
             if (proc.Length == 0)
             {
                 //MessageBox.Show("Plutonium is not open.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -276,40 +277,26 @@ namespace ClassEditor
             {
                 foreach (Process p in proc)
                 {
-                    if (p.MainWindowTitle != "")
+                    string title = p.MainWindowTitle;
+                    if (title != "" && !title.StartsWith("Plutonium r"))
                     {
                         m.OpenProcess(p.Id);
-                        //MessageBox.Show("Oppened Plutonium");
-                        switch (m.ReadString("13689BEC", "", 16))
+                        //MessageBox.Show("Opened Plutonium");
+                        if (title.StartsWith("Plutonium T6 Multiplayer"))
                         {
-                            case "t6mp":
-                                status("Attached", Color.Green);
-                                enableAll(true);
-                                attached = true;
-                                return;
-                            case "t6zm":
-                                status("T6 Zombies is not supported.", Color.Red);
-                                return;
-                            case "iw5mp":
-                                status("IW5 is not supported.", Color.Red);
-                                return;
-                            case "t5mp":
-                                status("T5 is not supported.", Color.Red);
-                                return;
-                            case "t5zm":
-                                status("T5 is not supported.", Color.Red);
-                                return;
-                            case "t4mp":
-                                status("T4 is not supported.", Color.Red);
-                                return;
-                            case "t4zm":
-                                status("T4 is not supported.", Color.Red);
-                                return;
+                            status("Attached", Color.Green);
+                            enableAll(true);
+                            attached = true;
+                        }
+                        else
+                        {
+                            status("Only BO2 Multiplayer is supported", Color.Red);
                         }
                         break;
                     }
                 }
             }
+
         }
 
         public void status(string message, Color color)
@@ -396,7 +383,10 @@ namespace ClassEditor
                 int primary = m.ReadByte(classOffsets[0]);
                 int secondary = m.ReadByte(classOffsets[4]);
 
-                byte[] bytes = m.ReadBytes("02F9AFF8", 2); //selected class set
+                byte[] bytes = m.ReadBytes("02F9AFF8", 2); //selected class set 
+
+                if (bytes == null || bytes.Length == 0) 
+                    return;
 
                 for (int i = 0; i < selectedSet.Length; i++)
                 {
