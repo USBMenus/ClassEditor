@@ -278,19 +278,35 @@ namespace ClassEditor
                 foreach (Process p in proc)
                 {
                     string title = p.MainWindowTitle;
-                    if (title != "" && !title.StartsWith("Plutonium r"))
+                    if (title != "")
                     {
                         m.OpenProcess(p.Id);
                         //MessageBox.Show("Opened Plutonium");
-                        if (title.StartsWith("Plutonium T6 Multiplayer"))
+                        switch (m.ReadString("base+187E7D8C", "", 16))
                         {
-                            status("Attached", Color.Green);
-                            enableAll(true);
-                            attached = true;
-                        }
-                        else
-                        {
-                            status("Only BO2 Multiplayer is supported", Color.Red);
+                            case "t6mp":
+                                status("Attached", Color.Green);
+                                enableAll(true);
+                                attached = true;
+                                return;
+                            case "t6zm":
+                                status("T6 Zombies is not supported.", Color.Red);
+                                return;
+                            case "iw5mp":
+                                status("IW5 is not supported.", Color.Red);
+                                return;
+                            case "t5mp":
+                                status("T5 is not supported.", Color.Red);
+                                return;
+                            case "t5zm":
+                                status("T5 is not supported.", Color.Red);
+                                return;
+                            case "t4mp":
+                                status("T4 is not supported.", Color.Red);
+                                return;
+                            case "t4zm":
+                                status("T4 is not supported.", Color.Red);
+                                return;
                         }
                         break;
                     }
