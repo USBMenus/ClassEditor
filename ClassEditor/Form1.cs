@@ -282,7 +282,7 @@ namespace ClassEditor
                     {
                         m.OpenProcess(p.Id);
                         //MessageBox.Show("Opened Plutonium");
-                        switch (m.ReadString("base+187E7D8C", "", 16))
+                        switch (m.ReadString("base+1E0B5F3C", "", 16))
                         {
                             case "t6mp":
                                 status("Attached", Color.Green);
@@ -337,7 +337,7 @@ namespace ClassEditor
                 MessageBox.Show("Clipboard is not a valid class set.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (MessageBox.Show("Are you sure you want to import from clipboard?\nThis wil overwrite the selected class set and if the data is malformed it may cause your game to crash.\nThis can NOT be undone.", "Waring!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to import from clipboard?\nThis wil overwrite the selected class set and if the data is malformed it may cause your game to crash.\nThis can NOT be undone.", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 byte[] bytes = Convert.FromBase64String(code);
                 m.WriteBytes("02F9AFFA", bytes);
@@ -533,13 +533,13 @@ namespace ClassEditor
         private void importClassButton_Click(object sender, EventArgs e)
         {
             string code = Clipboard.GetText();
-            MessageBox.Show(code.Length.ToString());
+            //MessageBox.Show(code.Length.ToString());
             if (code.Length != 68)
             {
                 MessageBox.Show("Clipboard is not a valid class.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (MessageBox.Show("Are you sure you want to import from clipboard?\nThis wil overwrite the selected class set if the data is malformed it may cause your game to crash.\nThis can NOT be undone.", "Waring!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to import from clipboard?\nThis wil overwrite the selected class set if the data is malformed it may cause your game to crash.\nThis can NOT be undone.", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 byte[] bytes = Convert.FromBase64String(code);
                 m.WriteBytes("02F9AFFA", bytes);
