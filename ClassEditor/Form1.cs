@@ -44,6 +44,8 @@ namespace ClassEditor
         string[] launcherAttachments = { };
         byte[][] selectedSet = { new byte[] { 0, 0 }, new byte[] { 64, 0 }, new byte[] { 128, 0 }, new byte[] { 192, 0 }, new byte[] { 0, 1 }, new byte[] { 64, 1 }, new byte[] { 128, 1 }, new byte[] { 192, 1 }, new byte[] { 0, 2 }, new byte[] { 64, 2 } };
 
+        string gameNameAddress = "base+1E0B68CC";
+
         public Form1()
         {
             InitializeComponent();
@@ -281,8 +283,7 @@ namespace ClassEditor
                     if (title != "")
                     {
                         m.OpenProcess(p.Id);
-                        //MessageBox.Show("Opened Plutonium");
-                        switch (m.ReadString("base+1E0B5F3C", "", 16))
+                        switch (m.ReadString(gameNameAddress, "", 16))
                         {
                             case "t6mp":
                                 status("Attached", Color.Green);
@@ -306,6 +307,9 @@ namespace ClassEditor
                                 return;
                             case "t4zm":
                                 status("T4 is not supported.", Color.Red);
+                                return;
+                            default:
+                                status("Couldnt detect game. Tool may be outdated. Please wait for an update.", Color.Red);
                                 return;
                         }
                         break;

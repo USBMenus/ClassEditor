@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Memory, Version=1.2.27.0, Culture=neutral, processorArchitecture=x86">
       <HintPath>..\packages\Memory.dll.x86.1.2.27\lib\netstandard2.0\Memory.dll</HintPath>
