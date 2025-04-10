@@ -44,7 +44,7 @@ namespace ClassEditor
         string[] launcherAttachments = { };
         byte[][] selectedSet = { new byte[] { 0, 0 }, new byte[] { 64, 0 }, new byte[] { 128, 0 }, new byte[] { 192, 0 }, new byte[] { 0, 1 }, new byte[] { 64, 1 }, new byte[] { 128, 1 }, new byte[] { 192, 1 }, new byte[] { 0, 2 }, new byte[] { 64, 2 } };
 
-        string gameNameAddress = "base+1E0B68CC";
+        string gameNameAddress = "base+1E0B710C";
 
         public Form1()
         {
